@@ -1,0 +1,240 @@
+* {
+  font-family: "SF Pro Display";
+  border: red solid 1px;
+}
+.wrapper {
+  max-width: 1152px;
+  height: 700px;
+
+  color: #ffffff;
+  background-color: #161b30;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  font-family: SF Pro Display;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  padding-left: 23px;
+  height: 65px;
+  width: 1152px;
+  background-color: #2a2f45;
+}
+
+.head-logo {
+  width: 30px;
+  height: 30px;
+  background-image: url("images/logo.svg");
+  background-size: cover;
+  position: static;
+  background-size: auto;
+  background-position: 65px 70px;
+}
+
+.head-name {
+  width: 109px;
+  height: 19px;
+
+  font-family: "SF Pro Display";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  margin-left: 12px;
+}
+
+.city-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.city-form-text {
+  margin-top: 80px;
+  width: 510px;
+  height: 56px;
+  background: #2a2f45;
+  border-radius: 2px;
+  color: white;
+  border: none;
+}
+
+.box-help {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box-help-city {
+  width: 170px;
+  height: 38px;
+
+  font-family: SF Pro Display;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.box-help-favor {
+  width: 244px;
+  height: 38px;
+  font-family: SF Pro Display;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.weather-main {
+  background: radial-gradient(
+    80.36% 80.36% at 50% 0%,
+    #5a607c 0%,
+    #161b30 100%
+  );
+}
+
+.weather-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather-box-button {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.button-back {
+  display: flex;
+  flex-direction: row;
+  width: 81px;
+  height: 24px;
+  background: none;
+  border: none;
+}
+
+.button-back-icon {
+  min-width: 10px;
+  min-height: 17px;
+  background-image: url("images/coolicon.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.button-back-text {
+  border: none;
+  color: #8a91ab;
+  width: 45px;
+  height: 18px;
+  margin-left: 19px;
+  font-family: SF Pro Display;
+  font-size: 16px;
+  line-height: 18px;
+  text-align: left;
+}
+
+.button-to-favor {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+
+  background-image: url("images/Bookmark.svg");
+}
+
+.weather-city {
+  font-family: SF Pro Display;
+  font-size: 56px;
+  font-weight: 500;
+  line-height: 62px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.weather-box-temp-num {
+  font-family: SF Pro Display;
+  font-size: 130px;
+  font-weight: 600;
+  line-height: 144px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.weather-pressure {
+  font-family: SF Pro Display;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.weather-box-temp {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.weather-box-temp-icon {
+  width: 191px;
+  height: 191px;
+  background-image: url("images/temp-icon.svg");
+}
+
+.favor-weather-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.favor-weather-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 270px;
+  height: 190px;
+}
+
+.favor-weather-box_name {
+  font-family: SF Pro Display;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: center;
+
+  width: 48px;
+  height: 15px;
+  margin-top: 23px;
+}
+
+.favor-weather-box_temp {
+  width: 74px;
+  height: 44px;
+  font-family: SF Pro Display;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 44px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.favor-weather-box_icon {
+  width: 78px;
+  height: 78px;
+}
+
