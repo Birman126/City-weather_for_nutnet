@@ -84,11 +84,12 @@ class App extends React.Component {
       }
       return false;
     }
-    if (
+localStorage.setItem('Cityes', 1)
+    if ((
       wordInArr(
         this.state.city.toString(),
         localStorage.getItem("Cityes").split(",")
-      )
+      ))&&(localStorage.getItem("Cityes")!==null)
     ) { let storageStr =
       localStorage.getItem("Cityes");
     let word =  this.state.city.toString(); 
