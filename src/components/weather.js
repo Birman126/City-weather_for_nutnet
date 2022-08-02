@@ -1,10 +1,14 @@
 import React from "react";
 import clear from "../images/sun.svg";
 import cloud from "../images/clouds.svg";
+import rain from "../images/Rain.svg";
+import fog from "../images/fog.svg";
 
 const weatherFunc = (key) => {
 if (key === 'Clear') {return clear}
 if (key === 'Clouds') {return cloud}
+if (key === 'Rain') {return rain}
+if (key === 'Fog') {return fog}
 }
 
 
@@ -25,10 +29,7 @@ const Weather = (props) => {
           <div className="weather-comment">{props.weatherDes}</div>
           <div className="weather-box-temp">
             <div className="weather-box-temp-num">{props.temp}</div>
-            {/* <div className="weather-box-temp-icon"> */}
-            <img src={weatherFunc(props.weather)} width="191px" height="191px" alt='weather'></img>
-            
-            {/* </div> */}
+               <img src={weatherFunc(props.weather)} width="191px" height="191px" alt='weather'></img>    
           </div>
           <div className="weather-pressure"> {props.pressure} мм рт.ст.</div>
           <div className="weather-sunset">Закат в {props.sunset}</div>

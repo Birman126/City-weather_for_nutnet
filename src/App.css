@@ -1,11 +1,12 @@
 * {
   font-family: "SF Pro Display";
-  border: red solid 1px;
+  /* border: red solid 1px; */
 }
 .wrapper {
   max-width: 1152px;
   height: 700px;
-
+padding: none;
+margin: none;
   color: #ffffff;
   background-color: #161b30;
 }
@@ -62,7 +63,33 @@
   border-radius: 2px;
   color: white;
   border: none;
+  
 }
+
+.autocomplete{
+  position: absolute;
+  left: 0;
+  top: 50px;
+  width: 100%;
+  background: white;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 240px;
+  height: auto;
+  overflow: auto;
+}
+
+.autocomplete__item{
+  padding: 10px;
+}
+.autocomplete__item:hover {
+  background: rgb(180,180,180);
+  cursor: pointer;
+  transition: cubic-bezier(1, 0, 0, 1) .3s all;
+
+}
+
 
 .box-help {
   display: flex;
@@ -195,18 +222,23 @@
 }
 
 .favor-weather-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  padding-top: 55px;
+    padding-left: 140px;
+    padding-right: 140px;
+    display: grid;
+    grid-column-gap:35px;
+    grid-row-gap: 30px;
+    grid-template-columns: repeat(3, [col] 1fr);
+  
 }
 
 .favor-weather-box {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 270px;
+  max-width: 270px;
   height: 190px;
+  background: #292E44;
 }
 
 .favor-weather-box_name {
@@ -238,3 +270,271 @@
   height: 78px;
 }
 
+
+@media screen and (max-width: 800px) {
+  .wrapper {
+    background-color: #161B30;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    font-family: SF Pro Display;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+    padding-left: 23px;
+    height: 65px;
+    width: 1152px;
+    background-color: none;
+  }
+  
+  .head-logo {
+    width: 30px;
+    height: 30px;
+    background-image: url("images/logo.svg");
+    background-size: cover;
+    position: static;
+    background-size: auto;
+    background-position: 65px 70px;
+  }
+  
+  .head-name {
+    width: 109px;
+    height: 19px;
+  
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    margin-left: 12px;
+  }
+  
+  .city-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .city-form-text {
+    margin-top: 20px;
+    width: 95%;
+    max-width: 335px;
+    height: 56px;
+    background: #2a2f45;
+    border-radius: 2px;
+    color: white;
+    border: none;
+    
+  }
+  
+  .autocomplete{
+    position: absolute;
+    left: 0;
+    top: 50px;
+    width: 100%;
+    background: white;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 240px;
+    height: auto;
+    overflow: auto;
+  }
+  
+  .autocomplete__item{
+    padding: 10px;
+  }
+  .autocomplete__item:hover {
+    background: rgb(180,180,180);
+    cursor: pointer;
+    transition: cubic-bezier(1, 0, 0, 1) .3s all;
+  
+  }
+  
+  
+  .box-help {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .box-help-city {
+    width: 170px;
+    height: 38px;
+  
+    font-family: SF Pro Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+  
+  .box-help-favor {
+    width: 244px;
+    height: 38px;
+    font-family: SF Pro Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+  
+  .weather-main {
+    background: radial-gradient(
+      80.36% 80.36% at 50% 0%,
+      #5a607c 0%,
+      #161b30 100%
+    );
+  }
+  
+  .weather-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .weather-box-button {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .button-back {
+    display: flex;
+    flex-direction: row;
+    width: 81px;
+    height: 24px;
+    background: none;
+    border: none;
+  }
+  
+  .button-back-icon {
+    min-width: 10px;
+    min-height: 17px;
+    background-image: url("images/coolicon.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .button-back-text {
+    border: none;
+    color: #8a91ab;
+    width: 45px;
+    height: 18px;
+    margin-left: 19px;
+    font-family: SF Pro Display;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: left;
+  }
+  
+  .button-to-favor {
+    width: 24px;
+    height: 24px;
+    background: none;
+    border: none;
+  
+    background-image: url("images/Bookmark.svg");
+  }
+  
+  .weather-city {
+    font-family: SF Pro Display;
+    font-size: 56px;
+    font-weight: 500;
+    line-height: 62px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  
+  .weather-box-temp-num {
+    font-family: SF Pro Display;
+    font-size: 130px;
+    font-weight: 600;
+    line-height: 144px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  
+  .weather-pressure {
+    font-family: SF Pro Display;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  
+  .weather-box-temp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .weather-box-temp-icon {
+    width: 191px;
+    height: 191px;
+    background-image: url("images/temp-icon.svg");
+  }
+  
+  .favor-weather-main {
+    
+
+    padding-top: 33px;
+  padding-left: 10px;
+  padding-right: 20px;
+  display: grid;
+  grid-column-gap:19px;
+  grid-row-gap: 20px;
+  grid-template-columns: repeat(2, [col] 1fr);
+    
+  }
+  
+  .favor-weather-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 270px;
+    height: 190px;
+    background: #292E44;
+  }
+  
+  .favor-weather-box_name {
+    font-family: SF Pro Display;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: center;
+  
+    width: 48px;
+    height: 15px;
+    margin-top: 23px;
+  }
+  
+  .favor-weather-box_temp {
+    width: 74px;
+    height: 44px;
+    font-family: SF Pro Display;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 44px;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+  
+  .favor-weather-box_icon {
+    width: 78px;
+    height: 78px;
+  }
+}

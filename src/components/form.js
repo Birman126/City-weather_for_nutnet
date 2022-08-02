@@ -10,7 +10,8 @@ const Form = (props) => (
           name="city"
           placeholder="Укажите город"
         />
-        {/* <button>Получить погоду</button> */}
+        
+        
       </form>
     )
     

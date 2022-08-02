@@ -3,9 +3,11 @@ import Info from "./components/info";
 import Form from "./components/form";
 import Weather from "./components/weather";
 import Help from "./components/help";
-import Favor from "./components/favor";
+// import Favor from "./components/favor";
+import FavorList from "./components/favorList";
 
 class App extends React.Component {
+  
   state = {
     API_KEY: "d2299dee007ffb7f093b142b8732dfee",
     page1: true,
@@ -25,7 +27,9 @@ class App extends React.Component {
       const api_url = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.state.API_KEY}`
       );
+      
       const data = await api_url.json();
+      console.log(data);
       this.setState({ page1: false });
       var sunset = data.sys.sunset;
       var date = new Date();
@@ -51,11 +55,15 @@ class App extends React.Component {
   };
 
   render() {
+    
+    
+    if(localStorage.getItem("Cityes")!=null) {var storageArr=localStorage.getItem("Cityes").split(",")}
+    else {var storageArr=[]}
     return (
       <div className="wrapper">
         {this.state.page1 && <Info />}
         {this.state.page1 && <Form weatherMethod={this.gettingWeather} />}
-        {this.state.page1 && <Help />}
+        {this.state.page1 && (!localStorage.getItem('Cityes')[0]) &&<Help />}
         {!this.state.page1 && (
           <Weather
             handlerClickBack={this.handlerClickBack}
@@ -71,11 +79,13 @@ class App extends React.Component {
             error={this.state.error}
           />
         )}
-        <Favor API_KEY={this.state.API_KEY} />
+        {this.state.page1 && (localStorage.getItem('Cityes')[0]) && <FavorList API_KEY={this.state.API_KEY} storageArr={storageArr} />}
       </div>
     );
   }
-  handlerClickFavor = () => { //функция нажатия на кнопку "избранное" добавляет или удаляет город из localStorage
+  handlerClickFavor = () => {
+    
+    //функция нажатия на кнопку "избранное" добавляет или удаляет город из localStorage
     function wordInArr(word, arr) {
       for (let i = 0; i < arr.length; i++) {
         if (word === arr[i]) {
@@ -84,30 +94,30 @@ class App extends React.Component {
       }
       return false;
     }
-localStorage.setItem('Cityes', 1)
-    if ((
+    if (localStorage.getItem("Cityes") === null) {
+      localStorage.setItem("Cityes", this.state.city.toString());
+      return
+    }
+    
+
+    if (
       wordInArr(
         this.state.city.toString(),
         localStorage.getItem("Cityes").split(",")
-      ))&&(localStorage.getItem("Cityes")!==null)
-    ) { let storageStr =
-      localStorage.getItem("Cityes");
-    let word =  this.state.city.toString(); 
-    let storageArr = storageStr.split(",");
-    let indexOfWord = storageArr.indexOf(word);
-    storageArr.splice(indexOfWord, 1);
-    let storageSet = new Set(storageArr);
-    localStorage.setItem("Cityes", Array.from(storageSet).toString())
-
+      )
+    ) {
+      
+      let storageStr = localStorage.getItem("Cityes");
+      let word = this.state.city.toString();
+      let storageArr = storageStr.split(",");
+      let indexOfWord = storageArr.indexOf(word);
+      storageArr.splice(indexOfWord, 1);
+      let storageSet = new Set(storageArr);
+      localStorage.setItem("Cityes", Array.from(storageSet).toString());
       
     } else {
-      console.log(
-        wordInArr(
-          this.state.city.toString(),
-          localStorage.getItem("Cityes").split(",")
-        )
-      );
-
+      
+      
       if (localStorage.getItem("Cityes") === null) {
         localStorage.setItem("Cityes", this.state.city.toString());
       }
