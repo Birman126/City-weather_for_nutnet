@@ -1,4 +1,4 @@
-import Favor from "./favor";
+import Favor from "./favor1";
 
 export default function FavorList(props) {
     
