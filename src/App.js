@@ -17,6 +17,7 @@ class App extends React.Component {
     sunrise: undefined,
     sunset: undefined,
     error: undefined,
+    classesFavor: 'button-to-favor'
   };
 
   gettingWeather = async (e) => {
@@ -37,6 +38,7 @@ class App extends React.Component {
       var sunset_date = date.getHours() + 12 + ":" + date.getMinutes();
       var temp = (data.main.temp - 273).toFixed(0);
       var temp_data = temp.toString() + "\xB0";
+      var pressure = (data.main.pressure * (0.750062)).toFixed(0);
 
       this.setState({
         temp: temp_data,
@@ -44,7 +46,7 @@ class App extends React.Component {
         weatherDes: data.weather[0]["description"],
         city: data.name,
         country: data.sys.country,
-        pressure: data.main.pressure,
+        pressure: pressure,
         sunset: sunset_date,
         error: "Ошибка",
       });
@@ -77,6 +79,8 @@ class App extends React.Component {
             pressure={this.state.pressure}
             sunset={this.state.sunset}
             error={this.state.error}
+            classesFavor={this.state.classesFavor}
+            
           />
         )}
         {this.state.page1 && (localStorage.getItem('Cityes')[0]) && <FavorList API_KEY={this.state.API_KEY} storageArr={storageArr} />}
@@ -98,7 +102,10 @@ class App extends React.Component {
       localStorage.setItem("Cityes", this.state.city.toString());
       return
     }
-    
+    if (localStorage.getItem("Cityes").split(',')[0] === '') {
+      localStorage.setItem("Cityes", this.state.city.toString());
+      return
+    }
 
     if (
       wordInArr(
@@ -106,7 +113,7 @@ class App extends React.Component {
         localStorage.getItem("Cityes").split(",")
       )
     ) {
-      
+      this.setState({ classesFavor: 'button-to-favor' });
       let storageStr = localStorage.getItem("Cityes");
       let word = this.state.city.toString();
       let storageArr = storageStr.split(",");
@@ -117,8 +124,8 @@ class App extends React.Component {
       
     } else {
       
-      
-      if (localStorage.getItem("Cityes") === null) {
+      this.setState({ classesFavor: 'button-to-favor__done' });
+      if (localStorage.getItem("Cityes")[0] === null) {
         localStorage.setItem("Cityes", this.state.city.toString());
       }
       if (localStorage.getItem("Cityes") !== null) {
@@ -129,7 +136,7 @@ class App extends React.Component {
         localStorage.setItem("Cityes", Array.from(storageSet).toString());
         
       }
-    }
-  };
+    }console.log(this.state.classesFavor)
+  } ;
 }
 export default App;

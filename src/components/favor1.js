@@ -52,17 +52,17 @@ class Favor extends React.Component {
       
       }
   };
-  
+  componentDidMount() {this.gettingWeather()}
   
   render() {
-    // console.log(this.state.temp);
+    console.log(this.state.temp);
     console.log(this.props.city)
     
     return (
     
       <div className="favor-weather-box">
           <div className="favor-weather-box_name">{this.props.city}</div>
-          <div className="favor-weather-box_temp">{this.state.temp}-13`</div>
+          <div className="favor-weather-box_temp">{this.state.temp}</div>
           <div className="favor-weather-box_icon">
           <img src={weatherFunc(this.state.weather)} width="78px" height="78px" alt='weather'></img>
           </div>

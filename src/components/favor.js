@@ -38,7 +38,7 @@ return data
     
         <div className="favor-weather-box">
             <div className="favor-weather-box_name">{props.city}</div>
-            <div className="favor-weather-box_temp">{props.temp}-13`</div>
+            <div className="favor-weather-box_temp">{props.temp}</div>
             <div className="favor-weather-box_icon">
             <img src={weatherFunc(props.weather)} width="78px" height="78px" alt='weather'></img>
             </div>

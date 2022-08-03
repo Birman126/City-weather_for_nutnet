@@ -181,6 +181,15 @@ margin: none;
   background-image: url("images/Bookmark.svg");
 }
 
+.button-to-favor__done {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  background-repeat: no-repeat;
+  background-image: url("images/Bookmark_use.svg");
+}
+
 .weather-city {
   font-family: SF Pro Display;
   font-size: 56px;
