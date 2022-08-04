@@ -1,4 +1,4 @@
-import Favor from "./favor1";
+import Favor from "./favor";
 
 export default function FavorList(props) {
     
@@ -14,7 +14,7 @@ export default function FavorList(props) {
             
             {cityArr.map((item) => {
                 
-                return (<Favor city={item} key={(cityArr.indexOf(item))}/>)
+                return (<Favor handlerClickToWeather={props.handlerClickToWeather} city={item} key={(cityArr.indexOf(item))}/>)
             })}
         </div>
             

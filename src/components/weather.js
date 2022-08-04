@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import clear from "../images/sun.svg";
 import cloud from "../images/clouds.svg";
 import rain from "../images/Rain.svg";
@@ -12,35 +12,22 @@ const weatherFunc = (key) => {
 };
 
 const Weather = (props) => {
-  var item ='button-to-favor'
-//   const state = {
-// favorClass : 'button-to-favor'
-//   }
-
-  // const [favorClass, setFavorClass] = useState(['button-to-favor'])
-//   function wordInArr(word, arr) {
-//     for (let i = 0; i < arr.length; i++) {
-//       if (word === arr[i]) {
-//         return true;
-//       }
-//     }
-//     return false;
-//   }
-
-  
-//  const updateFavorIcon =()=> {
-//   if (
-//     wordInArr(
-//       props.city,
-//       localStorage.getItem("Cityes").split(",")
-//     )
-//   ) {this.setState({ favorClass: 'button-to-favor__done' });
-//     return(state.favorClass);
-//   } else {this.setState({ favorClass: 'button-to-favor' });
-//   return(state.favorClass)
-// }
-//   }
-//   console.log(updateFavorIcon())
+  var classesFavor ='button-to-favor'
+  console.log(localStorage.getItem('Cityes').split(','))
+  function wordInArr(word, arr) {
+    for (let i = 0; i < arr.length; i++) {
+      if (word === arr[i]) {
+        return true;
+      }
+    }
+    return false ;
+  }
+  console.log(props.classesFavor)
+  // wordInArr(props.city,localStorage.getItem('Cityes').split(','))
+  // console.log(classesFavor)
+  // if(wordInArr) {classesFavor='button-to-favor'}
+  // else {classesFavor=classesFavor+' button-to-favor__done'}
+  // props.handlerClickFavor()
   return (
     <div className="weather-main">
       {props.city && (
@@ -51,9 +38,9 @@ const Weather = (props) => {
               <div className="button-back-text">Назад</div>
             </button>
             <button
-              
+              onChange={wordInArr}
               className={props.classesFavor}
-              onClick={props.handlerClickFavor}  
+              onClick={props.handlerClickFavor}
             ></button>
           </div>
           <div className="weather-city">{props.city}</div>
@@ -61,13 +48,20 @@ const Weather = (props) => {
           <div className="weather-box-temp">
             <div className="weather-box-temp-num">{props.temp}</div>
             <img
+            className="weather-box-temp-img"
               src={weatherFunc(props.weather)}
               width="191px"
               height="191px"
-              alt="weather"
+              alt={props.weatherDes}
             ></img>
           </div>
-          <div className="weather-pressure"> {props.pressure} мм рт.ст.</div>
+          <div className="weather-pressure"> 
+          <div className="weather-pressure_icon"
+              
+              
+              alt='барометр'
+            ></div>
+            {props.pressure} мм рт.ст.</div>
           <div className="weather-sunset">Закат в {props.sunset}</div>
         </div>
       )}

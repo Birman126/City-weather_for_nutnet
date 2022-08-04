@@ -1,8 +1,8 @@
 import React from "react";
 
 
-const Info = () => (
-  <div className="header">
+const Info = (props) => (
+  <div className="header" onClick={props.handlerClickBack} >
     <div className="head-logo"></div>
     <div className="head-name">WeatherCheck</div>
   </div>

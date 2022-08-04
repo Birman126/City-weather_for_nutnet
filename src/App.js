@@ -21,12 +21,21 @@ class App extends React.Component {
   };
 
   gettingWeather = async (e) => {
-    const city = e.target.elements.city.value;
+    let city;
+    if (typeof e === 'object') {
+     city = e.target.elements.city.value;
     e.preventDefault();
+    }
+
+    if (typeof e === 'string') {
+       city = e;
+      }
+
+      
 
     if (city) {
       const api_url = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.state.API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.state.API_KEY}&lang=ru`
       );
       
       const data = await api_url.json();
@@ -36,6 +45,7 @@ class App extends React.Component {
       var date = new Date();
       date.setTime(sunset);
       var sunset_date = date.getHours() + 12 + ":" + date.getMinutes();
+      if(date.getMinutes()===0){sunset_date=date.getHours() + 12 + ":00"}
       var temp = (data.main.temp - 273).toFixed(0);
       var temp_data = temp.toString() + "\xB0";
       var pressure = (data.main.pressure * (0.750062)).toFixed(0);
@@ -56,6 +66,11 @@ class App extends React.Component {
     this.setState({ page1: true });
   };
 
+  handlerClickToWeather = (item) => {
+      this.gettingWeather(item)
+    
+  };
+
   render() {
     
     
@@ -63,11 +78,12 @@ class App extends React.Component {
     else {var storageArr=[]}
     return (
       <div className="wrapper">
-        {this.state.page1 && <Info />}
+        {<Info handlerClickBack={this.handlerClickBack} />}
         {this.state.page1 && <Form weatherMethod={this.gettingWeather} />}
         {this.state.page1 && (!localStorage.getItem('Cityes')[0]) &&<Help />}
         {!this.state.page1 && (
           <Weather
+          
             handlerClickBack={this.handlerClickBack}
             handlerClickFavor={this.handlerClickFavor}
             temp={this.state.temp}
@@ -83,10 +99,11 @@ class App extends React.Component {
             
           />
         )}
-        {this.state.page1 && (localStorage.getItem('Cityes')[0]) && <FavorList API_KEY={this.state.API_KEY} storageArr={storageArr} />}
+        {this.state.page1 && (localStorage.getItem('Cityes')[0]) && <FavorList handlerClickToWeather={this.handlerClickToWeather} API_KEY={this.state.API_KEY} storageArr={storageArr} />}
       </div>
     );
   }
+  
   handlerClickFavor = () => {
     
     //функция нажатия на кнопку "избранное" добавляет или удаляет город из localStorage
@@ -98,22 +115,27 @@ class App extends React.Component {
       }
       return false;
     }
-    if (localStorage.getItem("Cityes") === null) {
+   
+    if (localStorage.getItem("Cityes")[0] === null || localStorage.getItem("Cityes").split(',')[0] === '') {
       localStorage.setItem("Cityes", this.state.city.toString());
+      
+      this.setState({ classesFavor: 'button-to-favor button-to-favor__done' });
+      // console.log(this.state.classesFavor)
+      
       return
     }
-    if (localStorage.getItem("Cityes").split(',')[0] === '') {
-      localStorage.setItem("Cityes", this.state.city.toString());
-      return
-    }
+    
 
     if (
       wordInArr(
-        this.state.city.toString(),
+        this.state.city,
         localStorage.getItem("Cityes").split(",")
       )
     ) {
+      
       this.setState({ classesFavor: 'button-to-favor' });
+      // console.log(this.state.classesFavor)
+      
       let storageStr = localStorage.getItem("Cityes");
       let word = this.state.city.toString();
       let storageArr = storageStr.split(",");
@@ -124,7 +146,9 @@ class App extends React.Component {
       
     } else {
       
-      this.setState({ classesFavor: 'button-to-favor__done' });
+      this.setState({ classesFavor: 'button-to-favor button-to-favor__done' });
+      // console.log(this.state.classesFavor)
+      
       if (localStorage.getItem("Cityes")[0] === null) {
         localStorage.setItem("Cityes", this.state.city.toString());
       }
@@ -136,7 +160,8 @@ class App extends React.Component {
         localStorage.setItem("Cityes", Array.from(storageSet).toString());
         
       }
-    }console.log(this.state.classesFavor)
+    }
+    
   } ;
 }
 export default App;
