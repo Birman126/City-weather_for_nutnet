@@ -1,14 +1,25 @@
 import React from "react";
 import clear from "../images/sun.svg";
 import cloud from "../images/clouds.svg";
+import rain from "../images/Rain.svg";
+import fog from "../images/fog.svg";
 
 const weatherFunc = (key) => {
-if (key === 'Clear') {return clear}
-if (key === 'Clouds') {return cloud}
-}
+  if (key === "Clear") {
+    return clear;
+  }
+  if (key === "Clouds") {
+    return cloud;
+  }
+  if (key === "Rain") {
+    return rain;
+  }
+  if (key === "Fog") {
+    return fog;
+  }
+};
 
 class Favor extends React.Component {
-  
   state = {
     API_KEY: "d2299dee007ffb7f093b142b8732dfee",
     page1: true,
@@ -22,15 +33,14 @@ class Favor extends React.Component {
 
   gettingWeather = async (e) => {
     const city = this.props.city;
-    
 
     if (this.props.city) {
       const api_url = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.state.API_KEY}&lang=ru`
       );
-      
+
       const data = await api_url.json();
-      
+
       this.setState({ page1: false });
       var sunset = data.sys.sunset;
       var date = new Date();
@@ -49,23 +59,32 @@ class Favor extends React.Component {
         sunset: sunset_date,
         error: "Ошибка",
       });
-      
-      }
+    }
   };
-  componentDidMount() {this.gettingWeather()}
-  
+  componentDidMount() {
+    this.gettingWeather();
+  }
+
   render() {
-    
-    
     return (
-    
-      <div className="favor-weather-box" onClick={()=> this.props.handlerClickToWeather(this.props.city.toString())} >
-          <div className="favor-weather-box_name">{this.props.city}</div>
-          <div className="favor-weather-box_temp">{this.state.temp}</div>
-          <div className="favor-weather-box_icon">
-          <img src={weatherFunc(this.state.weather)} width="78px" height="78px" alt='weather'></img>
-          </div>
-      </div>);
+      <div
+        className="favor-weather-box"
+        onClick={() =>
+          this.props.handlerClickToWeather(this.props.city.toString())
+        }
+      >
+        <div className="favor-weather-box_name">{this.props.city}</div>
+        <div className="favor-weather-box_temp">{this.state.temp}</div>
+        <div className="favor-weather-box_icon">
+          <img
+            src={weatherFunc(this.state.weather)}
+            width="78px"
+            height="78px"
+            alt="weather"
+          ></img>
+        </div>
+      </div>
+    );
   }
 }
 export default Favor;
