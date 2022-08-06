@@ -60,8 +60,8 @@ class App extends React.Component {
       var date = new Date();
       date.setTime(sunset);
       var sunset_date = date.getHours() + 12 + ":" + date.getMinutes();
-      if (date.getMinutes() === 0) {
-        sunset_date = date.getHours() + 12 + ":00";
+      if (date.getMinutes() < 10) {
+        sunset_date = date.getHours() + 12 + ":0" + date.getMinutes();
       }
       var temp = (data.main.temp - 273).toFixed(0);
       var temp_data = temp.toString() + "\xB0";
