@@ -21,23 +21,18 @@ class App extends React.Component {
     styleItem:'autocomplete_item autocomplete_item__none',
     listItem: 'Москва',
   };
-  // listItem = 'Москва';
   styleItem = 'autocomplete_item autocomplete_item__none';
-  allCity =['Москва', 'Ижевск', 'Лондон', 'Париж', 'Саратов', "Санкт-Петербург", ""]
+  allCity =['Москва', 'Ижевск', 'Лондон', 'Париж', 'Саратов', "Санкт-Петербург", "Нью-Йорк"]
 
 
 searchItem = (item) => {
   
   if (item.length>2){
     this.setState({ styleItem: 'autocomplete_item' })
-    // console.log(this.state.styleItem)
-    // console.log(this.allCity[0].includes(item))
     
   for (let i=0; i<this.allCity.length; i++) {
     if (this.allCity[i].toLowerCase().includes(item.toLowerCase())) {
       this.setState({listItem: this.allCity[i]})
-      console.log(this.state.styleItem)
-      console.log(this.state.listItem)
     }
   }}
 else {this.setState({ styleItem: 'autocomplete_item autocomplete_item__none' })

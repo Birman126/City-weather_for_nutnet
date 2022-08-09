@@ -69,40 +69,33 @@
   border-radius: 2px;
   color: white;
   border: none;
-  /* border-color: green; */
   
 }
 .city-form-text:focus-visible {
-  /* background-color: black; */
   outline: none;
-  border-color: black;
+  border-color: none;
   border: none;
 }
 
 .autocomplete {
-  /* position: absolute; */
   left: 0;
-  /* top: 350px; */
   width: 100%;
-  background: white;
   list-style: none;
   margin: 0;
   padding: 0;
   max-height: 240px;
   max-width: 510px;
   height: auto;
-  /* overflow: auto; */
 }
 
 .autocomplete_item {
   
   width: 100%;
   max-width: 510px;
-  /* max-height: 240px; */
   background-color: #30354B;
   position: absolute;
   padding: 10px;
-  z-index: 99;
+  z-index: 999;
 }
 
 .autocomplete_item__none {
@@ -387,6 +380,7 @@
   }
 
   .city-form-text {
+    
     margin-top: 20px;
     width: 95%;
     max-width: 335px;
@@ -394,10 +388,16 @@
   }
 
   .autocomplete {
+    display: flex;
+    justify-content: center;
+    
     
   }
 
   .autocomplete_item {
+    position: absolute;
+    width: 95%;
+    max-width: 335px;
     
   }
   .autocomplete_item:hover {
