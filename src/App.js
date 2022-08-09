@@ -5,6 +5,8 @@ import Weather from "./components/weather";
 import Help from "./components/help";
 import FavorList from "./components/favorList";
 
+
+
 class App extends React.Component {
   state = {
     API_KEY: "d2299dee007ffb7f093b142b8732dfee",
@@ -16,7 +18,32 @@ class App extends React.Component {
     sunset: undefined,
     error: undefined,
     classesFavor: "button-to-favor",
+    styleItem:'autocomplete_item autocomplete_item__none',
+    listItem: 'Москва',
   };
+  // listItem = 'Москва';
+  styleItem = 'autocomplete_item autocomplete_item__none';
+  allCity =['Москва', 'Ижевск', 'Лондон', 'Париж', 'Саратов', "Санкт-Петербург", ""]
+
+
+searchItem = (item) => {
+  
+  if (item.length>2){
+    this.setState({ styleItem: 'autocomplete_item' })
+    // console.log(this.state.styleItem)
+    // console.log(this.allCity[0].includes(item))
+    
+  for (let i=0; i<this.allCity.length; i++) {
+    if (this.allCity[i].toLowerCase().includes(item.toLowerCase())) {
+      this.setState({listItem: this.allCity[i]})
+      console.log(this.state.styleItem)
+      console.log(this.state.listItem)
+    }
+  }}
+else {this.setState({ styleItem: 'autocomplete_item autocomplete_item__none' })
+}
+
+}
 
   handlerClickExample = () => {
     this.gettingWeather('Ижевск')
@@ -81,6 +108,7 @@ class App extends React.Component {
   };
   handlerClickBack = () => {
     this.setState({ page1: true });
+    this.setState({ styleItem: 'autocomplete_item autocomplete_item__none' })
   };
 
   handlerClickToWeather = (item) => {
@@ -88,10 +116,11 @@ class App extends React.Component {
   };
 
   render() {
+    var storageArr = [];
     if (localStorage.getItem("Cityes") != null) {
-      var storageArr = localStorage.getItem("Cityes").split(",");
+      storageArr = localStorage.getItem("Cityes").split(",");
     } else {
-      var storageArr = [];
+      storageArr = [];
     }
     var infoStyle = 'header__none'
     if (this.state.page1) {
@@ -101,7 +130,7 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         {<Info handlerClickBack={this.handlerClickBack} infoStyle={infoStyle} />}
-        {this.state.page1 && <Form weatherMethod={this.gettingWeather} />}
+        {this.state.page1 && <Form weatherMethod={this.gettingWeather} searchItem={this.searchItem} styleItem={this.state.styleItem} listItem={this.state.listItem}/>}
         {this.state.page1 && !localStorage.getItem("Cityes")[0] && <Help handlerClickExample={this.handlerClickExample}/>}
         {!this.state.page1 && (
           <Weather
