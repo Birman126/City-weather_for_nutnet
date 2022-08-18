@@ -4,6 +4,7 @@ import Form from "./components/form";
 import Weather from "./components/weather";
 import Help from "./components/help";
 import FavorList from "./components/favorList";
+import json from "./object/allCities.json";
 
 
 
@@ -22,17 +23,18 @@ class App extends React.Component {
     listItem: 'Москва',
   };
   styleItem = 'autocomplete_item autocomplete_item__none';
-  allCity =['Москва', 'Ижевск', 'Лондон', 'Париж', 'Саратов', "Санкт-Петербург", "Нью-Йорк"]
-
+  
+  allCity = json
+  
 
 searchItem = (item) => {
-  
+  console.log(this.allCity.city.length)
   if (item.length>2){
     this.setState({ styleItem: 'autocomplete_item' })
     
-  for (let i=0; i<this.allCity.length; i++) {
-    if (this.allCity[i].toLowerCase().includes(item.toLowerCase())) {
-      this.setState({listItem: this.allCity[i]})
+  for (let i=0; i<this.allCity.city.length; i++) {
+    if (this.allCity.city[i].name.toLowerCase().includes(item.toLowerCase())) {
+      this.setState({listItem: this.allCity.city[i].name})
     }
   }}
 else {this.setState({ styleItem: 'autocomplete_item autocomplete_item__none' })
@@ -76,7 +78,7 @@ else {this.setState({ styleItem: 'autocomplete_item autocomplete_item__none' })
       );
 
       const data = await api_url.json();
-      // console.log(data);
+      console.log(data);
       this.setState({ page1: false });
       var sunset = data.sys.sunset;
       var date = new Date();
