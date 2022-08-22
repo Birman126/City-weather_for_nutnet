@@ -8,9 +8,14 @@
   src: url("fonts/SFPRODISPLAYREGULAR.OTF");
 }
 
+/* .root {
+  height: 100%;
+} */
+
 .wrapper {
-  max-width: 1152px;
-  height: 700px;
+  /* max-width: 1152px; */
+  height: max-content;
+  min-height: 1000px;
   padding: none;
   margin: none;
   color: #ffffff;
@@ -113,6 +118,7 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  height: 100%;
 }
 
 .box-help-arrow {

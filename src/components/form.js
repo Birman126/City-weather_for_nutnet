@@ -4,6 +4,7 @@ import React from "react";
 
 const Form = (props) => (
   
+  
   <form className="city-form" onSubmit={props.weatherMethod}  >
     <input
       className="city-form-text"
@@ -12,6 +13,7 @@ const Form = (props) => (
       placeholder="Укажите город"
       autocomplete ='off'
       onChange={event=> props.searchItem(event.target.value)}
+      
       // onClick={()=>console.log(props.styleItem)}
     />
     <ul className="autocomplete">

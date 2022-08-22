@@ -6,7 +6,11 @@ import Help from "./components/help";
 import FavorList from "./components/favorList";
 import json from "./object/allCities.json";
 
-
+{
+  if (localStorage.getItem("Cityes"[0]) === null) {
+    localStorage.setItem("Cityes", "");
+  }
+}
 
 class App extends React.Component {
   state = {
@@ -19,32 +23,31 @@ class App extends React.Component {
     sunset: undefined,
     error: undefined,
     classesFavor: "button-to-favor",
-    styleItem:'autocomplete_item autocomplete_item__none',
-    listItem: 'Москва',
+    styleItem: "autocomplete_item autocomplete_item__none",
+    listItem: "Москва",
   };
-  styleItem = 'autocomplete_item autocomplete_item__none';
-  
-  allCity = json
-  
+  styleItem = "autocomplete_item autocomplete_item__none";
 
-searchItem = (item) => {
-  console.log(this.allCity.city.length)
-  if (item.length>2){
-    this.setState({ styleItem: 'autocomplete_item' })
-    
-  for (let i=0; i<this.allCity.city.length; i++) {
-    if (this.allCity.city[i].name.toLowerCase().includes(item.toLowerCase())) {
-      this.setState({listItem: this.allCity.city[i].name})
+  allCity = json;
+
+  searchItem = (item) => {
+    if (item.length > 2) {
+      this.setState({ styleItem: "autocomplete_item" });
+      for (let i = 0; i < this.allCity.city.length; i++) {
+        if (
+          this.allCity.city[i].name.toLowerCase().includes(item.toLowerCase())
+        ) {
+          this.setState({ listItem: this.allCity.city[i].name });
+        }
+      }
+    } else {
+      this.setState({ styleItem: "autocomplete_item autocomplete_item__none" });
     }
-  }}
-else {this.setState({ styleItem: 'autocomplete_item autocomplete_item__none' })
-}
-
-}
+  };
 
   handlerClickExample = () => {
-    this.gettingWeather('Ижевск')
-  }
+    this.gettingWeather("Ижевск");
+  };
 
   wordInArr = (word, arr) => {
     for (let i = 0; i < arr.length; i++) {
@@ -70,7 +73,6 @@ else {this.setState({ styleItem: 'autocomplete_item autocomplete_item__none' })
     } else {
       this.setState({ classesFavor: "button-to-favor" });
     }
-    
 
     if (city) {
       const api_url = await fetch(
@@ -78,14 +80,14 @@ else {this.setState({ styleItem: 'autocomplete_item autocomplete_item__none' })
       );
 
       const data = await api_url.json();
-      console.log(data);
+      // console.log(data);
       this.setState({ page1: false });
       var sunset = data.sys.sunset;
-      var date = new Date();
-      date.setTime(sunset);
-      var sunset_date = date.getHours() + 12 + ":" + date.getMinutes();
-      if (date.getMinutes() < 10) {
-        sunset_date = date.getHours() + 12 + ":0" + date.getMinutes();
+      var date1 = new Date();
+      date1.setTime(sunset*1000);
+      var sunset_date = date1.getHours() + ":" + date1.getMinutes();
+      if (date1.getMinutes() < 10) {
+        sunset_date = date1.getHours() + ":0" + date1.getMinutes();
       }
       var temp = (data.main.temp - 273).toFixed(0);
       var temp_data = temp.toString() + "\xB0";
@@ -105,7 +107,7 @@ else {this.setState({ styleItem: 'autocomplete_item autocomplete_item__none' })
   };
   handlerClickBack = () => {
     this.setState({ page1: true });
-    this.setState({ styleItem: 'autocomplete_item autocomplete_item__none' })
+    this.setState({ styleItem: "autocomplete_item autocomplete_item__none" });
   };
 
   handlerClickToWeather = (item) => {
@@ -119,16 +121,31 @@ else {this.setState({ styleItem: 'autocomplete_item autocomplete_item__none' })
     } else {
       storageArr = [];
     }
-    var infoStyle = 'header__none'
+    var infoStyle = "header__none";
     if (this.state.page1) {
-      infoStyle='header'
+      infoStyle = "header";
+    } else {
+      infoStyle = "header header__none";
     }
-    else {infoStyle = 'header header__none'}
     return (
       <div className="wrapper">
-        {<Info handlerClickBack={this.handlerClickBack} infoStyle={infoStyle} />}
-        {this.state.page1 && <Form weatherMethod={this.gettingWeather} searchItem={this.searchItem} styleItem={this.state.styleItem} listItem={this.state.listItem}/>}
-        {this.state.page1 && !localStorage.getItem("Cityes")[0] && <Help handlerClickExample={this.handlerClickExample}/>}
+        {
+          <Info
+            handlerClickBack={this.handlerClickBack}
+            infoStyle={infoStyle}
+          />
+        }
+        {this.state.page1 && (
+          <Form
+            weatherMethod={this.gettingWeather}
+            searchItem={this.searchItem}
+            styleItem={this.state.styleItem}
+            listItem={this.state.listItem}
+          />
+        )}
+        {this.state.page1 && !localStorage.getItem("Cityes")[0] && (
+          <Help handlerClickExample={this.handlerClickExample} />
+        )}
         {!this.state.page1 && (
           <Weather
             handlerClickBack={this.handlerClickBack}
@@ -165,7 +182,7 @@ else {this.setState({ styleItem: 'autocomplete_item autocomplete_item__none' })
     ) {
       localStorage.setItem("Cityes", this.state.city.toString());
       this.setState({ classesFavor: "button-to-favor button-to-favor__done" });
-        return;
+      return;
     }
     if (
       this.wordInArr(this.state.city, localStorage.getItem("Cityes").split(","))
